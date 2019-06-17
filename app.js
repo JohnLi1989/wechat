@@ -18,8 +18,8 @@ mongoose.connection.on('open',function(){
 var wechat_config = {
   wechat:{
     AppID:'wx9fd2965df64ac9f6',
-    AppSecret:'455f5281d328137018622de0a62d840d',
-    Token:'johnli',
+    AppSecret:'9570bdd07e4206010e118ab938bb9335',
+    Token:'fanhao',
     getAccessToken() {
       return file.readFileSync(access_token_file);
     },
