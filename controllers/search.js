@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const request = require('request');
-const cheerio = require('cheerio');
-var superagent = require('superagent');
+//const cheerio = require('cheerio');
+//var superagent = require('superagent');
 
 function result(fanhao){
 	return new Promise( (resolve,reject)=>{
