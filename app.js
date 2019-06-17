@@ -1,16 +1,18 @@
-const app = require('koa')()
-  , koa = require('koa-router')()
-  , logger = require('koa-logger')
-  , json = require('koa-json')
-  , views = require('koa-views')
-  , onerror = require('koa-onerror');
+const koa = require('koa');
+const app = new koa();
+const convert = require('koa-convert');
+const router = require('koa-router')();
+const logger = require('koa-logger');
+const json = require('koa-json');
+const views = require('koa-views');
+const onerror = require('koa-onerror');
 const path = require('path');
 const access = require('./middlewares/access');
 const file = require('./libs/file');
 const mongoose = require('mongoose');
 const access_token_file = path.join(__dirname,'./access_token/access_token');
 
-mongoose.connect('mongodb://localhost/actress');
+mongoose.connect('mongodb://localhost/actress', {useNewUrlParser: true});
 mongoose.connection.on('open',function(){
   console.log('mongodb is open');
 });
@@ -35,31 +37,31 @@ var users = require('./routes/users');
 var search  = require('./routes/search')
 
 // global middlewares
-app.use(views('views', {
+app.use(convert(views('views', {
   root: __dirname + '/views',
   default: 'ejs'
-}));
-app.use(require('koa-bodyparser')());
-app.use(json());
-app.use(logger());
+})));
+app.use(convert(require('koa-bodyparser')()));
+app.use(convert(json()));
+app.use(convert(logger()));
 
-app.use(function *(next){
+app.use(convert(function *(next){
   var start = new Date;
   yield next;
   var ms = new Date - start;
   console.log('%s %s - %s', this.method, this.url, ms);
-});
+}));
 
-app.use(require('koa-static')(__dirname + '/public'));
+app.use(convert(require('koa-static')(__dirname + '/public')));
 
-app.use(access(wechat_config.wechat)); //接入微信中间件
+app.use(convert(access(wechat_config.wechat))); //接入微信中间件
 // routes definition
-koa.use('/', index.routes(), index.allowedMethods());
-koa.use('/users', users.routes(), users.allowedMethods());
-koa.use('/search', search.routes(), search.allowedMethods());
+router.use('/', index.routes(), index.allowedMethods());
+router.use('/users', users.routes(), users.allowedMethods());
+router.use('/search', search.routes(), search.allowedMethods());
 
 // mount root routes  
-app.use(koa.routes());
+app.use(convert(router.routes()));
 
 app.on('error', function(err, ctx){
   logger.error('server error', err, ctx);
