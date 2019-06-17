@@ -50,6 +50,7 @@ class Wechat{
                 return Promise.resolve(data);
             });
     }
+
     isValidAccessToken(data) {
         if(!data || !data.access_token || !data.expires_in){
             return false;
@@ -69,13 +70,13 @@ class Wechat{
         var secret = this.AppSecret;
         var url = api.accessToken + '&appid=' + appid + '&secret=' + secret;
         return new Promise( (resolve,reject) => {
-            request({url:url,json:true}).then( (res) => {
-                var data = res.body;
+            request({url:url,json:true}, (err, res, body) => {
+                var data = body;
                 var now = Date.now();
                 var expires_in = now + (data.expires_in - 20) * 1000;
                 data.expires_in = expires_in;
-                resolve(data);
-            });
+                console.log(data)
+            }).then( resolve(data) );
         });
     }
 
