@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="trafficjunky-site-verification" content="444v08qt0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Search</title>
+
+    <script src='/javascripts/jquery.min.js'></script>
+    <link href='/stylesheets/bootstrap.min.css' rel='stylesheet'>
+    <link href='/stylesheets/bootstrap-theme.min.css' rel='stylesheet'>
+    <script>if(typeof jQuery != 'undefined'){document.write("<script src='/javascripts/bootstrap.min.js'><\/script>");}</script>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/base.css' ><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --> <!--[if lt IE 9]>
+    <script src='/javascripts/html5shiv.min.js'></script>
+    <script src='/javascripts/respond.min.js'></script><![endif]--> <!--[if lt IE 8]>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap-ie7.css' ><![endif]-->
+
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top top-search-bar">
+    <div class="container">
+        <form class="fullsearch-form" action="http://localhost:3000/search">
+            <div class="input-group">
+                <input name="keyword" type="text" class="form-control">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"> 搜索</button>
+              </span>
+            </div>
+        </form>
+    </div>
+</nav>
+<nav class="navbar navbar-inverse navbar-fixed-top top-bar" >
+    <p style="color:lightyellow;font-size: 20px;text-align: center;margin-top:10px">番号之家</p>
+</nav>
+
+<script src='/javascripts/base.js'></script>
+<div class="container">
+    <div class="data-list">
+        <div class="row hidden-xs">
+            <div class="col-sm-8 col-lg-9 field">Torrent Description</div>
+            <div class="col-sm-2 col-lg-1 text-right field">Size</div>
+            <div class="col-sm-2 col-lg-2 text-right field">Convert Date</div>
+        </div>
+
+        <% data.forEach(function(item){ %>
+        <div class="row">
+            <a href="<%=item.href%>" title="<%=item.title%>">
+                <div class="col-xs-12 col-sm-8 col-lg-9 file"><%=item.title%></div>
+                <div class="col-xs-12 size-date visible-xs-block"><%=item.size%></div>
+            </a>
+            <div class="col-sm-2 col-lg-1 hidden-xs text-right size">24.72MB</div>
+            <div class="col-sm-2 col-lg-2 hidden-xs text-right date">2016-07-14</div>
+        </div>
+        <% }) %>
+    </div>
+    <h3 class="visible-xs-block">Latest Search:</h3>
+    <div class="tags-box visible-xs-block">
+        <a class="tag t3" href="http://localhost:3000/search/ONCE-007"><i class="hidden-xs">1.</i>ONCE-007</a>
+        <a class="tag t1" href="http://localhost:3000/search/Kristen%20Scott%20blacked"><i class="hidden-xs">2.</i>Kristen Scott blacked</a>
+        <a class="tag t4" href="http://localhost:3000/search/abp416"><i class="hidden-xs">3.</i>abp416</a>
+        <a class="tag t4" href="http://localhost:3000/search/IBW-051"><i class="hidden-xs">4.</i>IBW-051</a>
+    </div>
+
+</div>
+
+</body>
+</html>
