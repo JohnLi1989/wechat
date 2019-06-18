@@ -75,7 +75,7 @@ class Wechat{
                 var now = Date.now();
                 var expires_in = now + (data.expires_in - 20) * 1000;
                 data.expires_in = expires_in;
-                console.log(data)
+                console.log(data);
                 resolve(data);
             });
         });
@@ -135,8 +135,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.createMenu}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'post',body:menu}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'post',body:menu}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
@@ -150,8 +150,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.getMenu}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'post'}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'post'}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
@@ -165,8 +165,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.deleteMenu}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'get'}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'get'}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });

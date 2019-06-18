@@ -34,7 +34,7 @@ var wechat_config = {
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var search  = require('./routes/search')
+var search  = require('./routes/search');
 
 // global middlewares
 app.use(convert(views('views', {

@@ -19,7 +19,7 @@ module.exports = (opt) => {
         var str = [token,timestamp,nonce].sort().join('');
         var sha = sha1(str);
 
-        //wechat.deleteMenu().then( () => wechat.createMenu(menu)).then( (msg) => console.log('----',msg));
+        wechat.deleteMenu().then( () => wechat.createMenu(menu)).then( (msg) => console.log('----',msg));
 
         //var self = this;
         if(this.method === 'GET'){
