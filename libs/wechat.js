@@ -87,8 +87,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                    var url = `${api.getMaterial}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'post',body:{media_id:mid}}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'post',body:{media_id:mid}}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
@@ -105,8 +105,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.getMaterialList}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'post',body:options}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'post',body:options}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
@@ -120,8 +120,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.getMaterialCount}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'get'}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'get'}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
@@ -180,8 +180,8 @@ class Wechat{
                 .fetchAccessToken()
                 .then( (data) => {
                     var url = `${api.semantic}access_token=${data.access_token}`;
-                    request({url:url,json:true,method:'post',body:para}).then( (res) => {
-                        var data = res.body;
+                    request({url:url,json:true,method:'post',body:para}, (err, res, body) => {
+                        var data = body;
                         resolve(data);
                     });
                 });
