@@ -25,10 +25,12 @@ ActressSchema.statics = {
     },
     get(name) {
         return new Promise( (resolve,reject)=> {
+            console.log("name--", name)
             this.findOne({$or:[{c_name:name},{j_name:name}]}, (error,data)=> {
                 if(error){
                     return reject(error);
                 }
+                console.log("------", data);
                 resolve(data);
             });
         });

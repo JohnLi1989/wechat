@@ -1,7 +1,6 @@
 const actressModel = require('../models/actress');
 
 exports.addActress = function *(next) {
-   console.log("add -----")
    var query = {
       c_name:'波多野结衣',
       j_name:'波多野結衣',
@@ -41,8 +40,7 @@ exports.addActress = function *(next) {
 }
 
 exports.getActress = function *(next) {
-   console.log(66666)
-   var name = this.query.name
+   var name = this.params.name
    var data = yield actressModel.get(name);
    this.body = {data:data}
 }
