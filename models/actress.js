@@ -14,8 +14,9 @@ const ActressSchema = new mongoose.Schema({
 ActressSchema.statics = {
     add(query) {
         return new Promise( (resolve,reject)=> {
-           this.create(query, (error,data)=> {
-              if(error){
+            this.create(query, (error,data)=> {
+                console.log(66666)
+                if(error){
                   return reject(error);
               }
                 resolve(data);

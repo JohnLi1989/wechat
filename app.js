@@ -1,7 +1,8 @@
 const koa = require('koa');
 const app = new koa();
 const convert = require('koa-convert');
-const router = require('koa-router')();
+const Router = require('koa-router');
+const router = new Router();
 const logger = require('koa-logger');
 const json = require('koa-json');
 const views = require('koa-views');
@@ -32,9 +33,9 @@ var wechat_config = {
   }
 }
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var search  = require('./routes/search');
+//var index = require('./routes/index');
+//var users = require('./routes/users');
+//var search  = require('./routes/search');
 
 // global middlewares
 app.use(convert(views('views', {
@@ -54,14 +55,21 @@ app.use(convert(function *(next){
 
 app.use(convert(require('koa-static')(__dirname + '/public')));
 
-app.use(convert(access(wechat_config.wechat))); //接入微信中间件
 // routes definition
-router.use('/', index.routes(), index.allowedMethods());
-router.use('/users', users.routes(), users.allowedMethods());
-router.use('/search', search.routes(), search.allowedMethods());
+//router.use('/', index.routes(), index.allowedMethods());
+//router.use('/users', users.routes(), users.allowedMethods());
+//router.use('/search', search.routes(), search.allowedMethods());
 
 // mount root routes  
-app.use(convert(router.routes()));
+//app.use(convert(router.routes()));
+require('./routes/routes')(router);
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+app.use(convert(access(wechat_config.wechat))); //接入微信中间件
+
 
 app.on('error', function(err, ctx){
   logger.error('server error', err, ctx);
